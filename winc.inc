@@ -33,7 +33,7 @@ stock CreateWarning(playerid, const callback[], title[], params[], timer = 80)
     format(__Warning_Info[playerid][__callback], 32, "WNG_%s", callback);
     PlayerTextDrawSetString(playerid, WarningTD[playerid][2], title);
     PlayerTextDrawSetString(playerid, WarningTD[playerid][3], params);
-    for(new i = 0; i < 4; i++)
+    for(int i = 0; i < 4; i++)
     PlayerTextDrawShow(playerid, WarningTD[playerid][i]);
     SetTimerEx("warning_update", (__Warning_Info[playerid][__timer]=timer), false, "i", playerid);
     return 1;
