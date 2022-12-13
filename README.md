@@ -6,5 +6,5 @@ and that's it, you can already use it.
 
 __Any issues or bugs, let me know on the issues page.__
 
-native: CreateWarning(playerid, const callback[], const title[], const params[], timer = 80)
+`native: CreateWarning(playerid, const callback[], const title[], const params[], timer = 80)`
 
