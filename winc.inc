@@ -1,5 +1,3 @@
-#tryinclude <a_samp>
-
 #if defined _winc_included
 	#endinput
 #endif
