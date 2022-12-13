@@ -4,7 +4,7 @@
 
 and that's it, you can already use it.
 
-__Any issues or bugs, let me know on the issues page.__
+__Any issues or bugs, let me know on the [issues](https://github.com/FreddieCrew/wInc/issues) page.__
 
 `native: CreateWarning(playerid, const callback[], title[], params[], timer = 80)`
 
