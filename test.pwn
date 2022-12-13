@@ -10,6 +10,7 @@ public OnGameModeInit() {
 
 public OnPlayerConnect(playerid) {
 	CreateWarning(playerid, "Missing", "Warning:", "You are missing nothing?", 10);
+	SpawnPlayer(playerid);
 	return 1;
 }
 
