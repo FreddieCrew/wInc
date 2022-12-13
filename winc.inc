@@ -115,3 +115,4 @@ public warning_update(playerid)
     loadingbar[playerid] += 0.8;
     return CallLocalFunction(__Warning_Info[playerid][__callback], "if", playerid, loadingbar[playerid]);
 }
+
