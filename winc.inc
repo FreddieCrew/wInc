@@ -1,7 +1,6 @@
 #if defined _winc_included
 	#endinput
 #endif
-#define _winc_included
 
 #define Warning:%0(%1,%2) \
 	forward WNG_%0(%1,%2);public WNG_%0(%1,%2)
@@ -27,13 +26,13 @@ native CreateWarning(playerid, const callback[], const title[], const params[], 
 */
 
 #define show_warning(%0, %1, warning(%0, %1)
-stock CreateWarning(playerid, const callback[], const title[], const params[], timer = 80)
+stock CreateWarning(playerid, const callback[], title[], params[], timer = 80)
 {
     LoadTDE_Warning(playerid);
     loadingbar[playerid] = 0.0;
     format(__Warning_Info[playerid][__callback], 32, "WNG_%s", callback);
-    PlayerTextDrawSetString(playerid, _:WarningTD[playerid][2], title);
-    PlayerTextDrawSetString(playerid, _:WarningTD[playerid][3], params);
+    PlayerTextDrawSetString(playerid, WarningTD[playerid][2], title);
+    PlayerTextDrawSetString(playerid, WarningTD[playerid][3], params);
     for(new i = 0; i < 4; i++)
     PlayerTextDrawShow(playerid, WarningTD[playerid][i]);
     SetTimerEx("warning_update", (__Warning_Info[playerid][__timer]=timer), false, "i", playerid);
@@ -115,4 +114,3 @@ public warning_update(playerid)
     loadingbar[playerid] += 0.8;
     return CallLocalFunction(__Warning_Info[playerid][__callback], "if", playerid, loadingbar[playerid]);
 }
-
