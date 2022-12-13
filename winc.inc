@@ -23,9 +23,8 @@ stock CreateWarning(playerid, const callback[],  title[],  params[], timer = 80)
     format(__Warning_Info[playerid][__callback], 32, "WNG_%s", callback);
     PlayerTextDrawSetString(playerid, WarningTD[playerid][2], title);
     PlayerTextDrawSetString(playerid, WarningTD[playerid][3], params);
-    for(new i = 0; i < 4; i++) {
+    for(new i = 0; i < 4; i++)
     PlayerTextDrawShow(playerid, WarningTD[playerid][i]);
-    }
     SetTimerEx("warning_update", (__Warning_Info[playerid][__timer]=timer), false, "i", playerid);
     return 1;
 }
@@ -74,7 +73,7 @@ stock LoadTDE_Warning(playerid)
     PlayerTextDrawSetProportional(playerid, WarningTD[playerid][2], 1);
     PlayerTextDrawSetSelectable(playerid, WarningTD[playerid][2], 0);
 
-    WarningTD[playerid][3] = CreatePlayerTextDraw(playerid, 238.000000, 333.000000, "_");
+    WarningTD[playerid][3] = CreatePlayerTextDraw(playerid, 238.000000, 333.000000, "Message");
     PlayerTextDrawFont(playerid, WarningTD[playerid][3], 1);
     PlayerTextDrawLetterSize(playerid, WarningTD[playerid][3], 0.150000, 0.750000);
     PlayerTextDrawTextSize(playerid, WarningTD[playerid][3], 400.000000, 17.000000);
@@ -99,7 +98,7 @@ public warning_update(playerid)
             PlayerTextDrawDestroy(playerid, WarningTD[playerid][i]);
         return false;
     }
-    SetTimerEx("swarning_update", __Warning_Info[playerid][__timer], false, "i", playerid);
+    SetTimerEx("warning_update", __Warning_Info[playerid][__timer], false, "i", playerid);
     PlayerTextDrawTextSize(playerid, WarningTD[playerid][1], 412.500000 - (loadingbar[playerid]*1.82), 1.0);
     PlayerTextDrawShow(playerid, WarningTD[playerid][1]);
     loadingbar[playerid] += 0.8;
