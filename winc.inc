@@ -94,7 +94,7 @@ native CreateWarning(playerid, const callback[], const title[], const params[], 
 #define show_warning(%0, %1, warning(%0, %1)
 stock CreateWarning(playerid, const callback[], title[], params[], timer = 80)
 {
-	LoadTDE_Warning(playerid);
+    LoadTDE_Warning(playerid);
     loadingbar[playerid] = 0.0;
     format(__Warning_Info[playerid][__callback], 32, "WNG_%s", callback);
     PlayerTextDrawSetString(playerid, WarningTD[playerid][2], title);
@@ -102,7 +102,7 @@ stock CreateWarning(playerid, const callback[], title[], params[], timer = 80)
     for(new i = 0; i < 4; i++)
     PlayerTextDrawShow(playerid, WarningTD[playerid][i]);
     SetTimerEx("warning_update", (__Warning_Info[playerid][__timer]=timer), false, "i", playerid);
-	return 1;
+    return 1;
 }
 
 stock LoadTDE_Warning(playerid)
