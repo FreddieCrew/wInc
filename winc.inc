@@ -4,14 +4,16 @@
 
 #define Warning:%0(%1,%2) \
 	forward WNG_%0(%1,%2);public WNG_%0(%1,%2)
-	
+
 	#if !defined _samp_included
 	#tryinclude <a_samp>
 	#if !defined _samp_included
 		#error winc could not find a_samp.inc file, please check your server includes
 	#endif
 #endif
-	
+
+#pragma warning disable 238
+
 
 enum WNGInfo
 {
@@ -20,23 +22,87 @@ enum WNGInfo
 }
 new __Warning_Info[MAX_PLAYERS][WNGInfo], PlayerText:WarningTD[MAX_PLAYERS][4], Float:loadingbar[MAX_PLAYERS] = 0.0;
 
+#if !defined FixText
+stock FixText(string[])
+{
+    new szFixed[1024], iPos, iLen;
+
+    for(iLen = strlen(string); iPos < iLen; iPos ++)
+        switch(string[iPos])
+        {
+            case '%':          szFixed[iPos] = 37;
+            case '&':          szFixed[iPos] = 38;
+            case '¡':          szFixed[iPos] = 64;
+            case '°':          szFixed[iPos] = 124;
+            case 'À':          szFixed[iPos] = 128;
+            case 'Á':          szFixed[iPos] = 129;
+            case 'Â':          szFixed[iPos] = 130;
+            case 'Ä', 'Ã':     szFixed[iPos] = 131;
+            case 'Ç':          szFixed[iPos] = 133;
+            case 'È':          szFixed[iPos] = 134;
+            case 'É':          szFixed[iPos] = 135;
+            case 'Ê':          szFixed[iPos] = 136;
+            case 'Ë':          szFixed[iPos] = 137;
+            case 'Ì':          szFixed[iPos] = 138;
+            case 'Í':          szFixed[iPos] = 139;
+            case 'Î':          szFixed[iPos] = 140;
+            case 'Ï':          szFixed[iPos] = 141;
+            case 'Ò':          szFixed[iPos] = 142;
+            case 'Ó':          szFixed[iPos] = 143;
+            case 'Ô':          szFixed[iPos] = 144;
+            case 'Ö', 'Õ':     szFixed[iPos] = 145;
+            case 'Ù':          szFixed[iPos] = 146;
+            case 'Ú':          szFixed[iPos] = 147;
+            case 'Û':          szFixed[iPos] = 148;
+            case 'Ü':          szFixed[iPos] = 149;
+            case 'à':          szFixed[iPos] = 151;
+            case 'á':          szFixed[iPos] = 152;
+            case 'â':          szFixed[iPos] = 153;
+            case 'ä', 'ã':     szFixed[iPos] = 154;
+            case 'ç':          szFixed[iPos] = 156;
+            case 'è':          szFixed[iPos] = 157;
+            case 'é':          szFixed[iPos] = 158;
+            case 'ê':          szFixed[iPos] = 159;
+            case 'ë':          szFixed[iPos] = 160;
+            case 'ì':          szFixed[iPos] = 161;
+            case 'í':          szFixed[iPos] = 162;
+            case 'î':          szFixed[iPos] = 163;
+            case 'ï':          szFixed[iPos] = 164;
+            case 'ò':          szFixed[iPos] = 165;
+            case 'ó':          szFixed[iPos] = 166;
+            case 'ô':          szFixed[iPos] = 167;
+            case 'ö', 'õ':     szFixed[iPos] = 168;
+            case 'ù':          szFixed[iPos] = 169;
+            case 'ú':          szFixed[iPos] = 170;
+            case 'û':          szFixed[iPos] = 171;
+            case 'ü':          szFixed[iPos] = 172;
+            case 'Ñ':          szFixed[iPos] = 173;
+            case 'ñ':          szFixed[iPos] = 174;
+            case '¿':          szFixed[iPos] = 175;
+            case '`':          szFixed[iPos] = 177;
+            default:           szFixed[iPos] = string[iPos];
+          }
+    return szFixed;
+}
+#endif
+
 
 /*
-native CreateWarning(playerid, const callback[], const title[], const params[], timer = 80)
+native CreateWarning(playerid, const callback[], const title[], const params[], timer = 80, fixtext = 0)
 */
 
 #define show_warning(%0, %1, warning(%0, %1)
 stock CreateWarning(playerid, const callback[], title[], params[], timer = 80)
 {
-    LoadTDE_Warning(playerid);
+	LoadTDE_Warning(playerid);
     loadingbar[playerid] = 0.0;
     format(__Warning_Info[playerid][__callback], 32, "WNG_%s", callback);
     PlayerTextDrawSetString(playerid, WarningTD[playerid][2], title);
     PlayerTextDrawSetString(playerid, WarningTD[playerid][3], params);
-    for(i = 0; i < 4; i++)
+    for(new i = 0; i < 4; i++)
     PlayerTextDrawShow(playerid, WarningTD[playerid][i]);
     SetTimerEx("warning_update", (__Warning_Info[playerid][__timer]=timer), false, "i", playerid);
-    return 1;
+	return 1;
 }
 
 stock LoadTDE_Warning(playerid)
